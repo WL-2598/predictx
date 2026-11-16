@@ -8,7 +8,7 @@ import ActivityFeed from '@/components/ActivityFeed';
 import Onboarding from '@/components/Onboarding';
 import { useEvents } from '@/lib/hooks';
 import { useActivityFeed } from '@/lib/hooks/useActivityFeed';
-import { allEvents } from '@/lib/data';
+import { allEvents, categories } from '@/lib/data';
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -38,7 +38,7 @@ export default function Home() {
       <Onboarding isOpen={showOnboarding} onClose={() => setShowOnboarding(false)} />
 
       {/* Main content */}
-      <main className="pt-16 pl-16 md:pl-56 pb-20 md:pb-0">
+      <main className="pt-16 md:pl-56 pb-20 md:pb-0">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
           {/* Hero Banner */}
           <div className="relative mb-8 rounded-2xl overflow-hidden bg-gradient-to-br from-[#141720] via-[#1a1f2e] to-[#141720] border border-gray-800/40 p-6 md:p-8">
@@ -71,6 +71,24 @@ export default function Home() {
           <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
             {/* Main events grid */}
             <div className="xl:col-span-3">
+              {/* Mobile category chips (sidebar is hidden below md) */}
+              <div className="md:hidden flex items-center gap-2 mb-4 overflow-x-auto pb-1 -mx-4 px-4 scrollbar-none">
+                {categories.map(cat => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap border transition-all ${
+                      activeCategory === cat.id
+                        ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+                        : 'bg-[#141720] text-gray-400 border-gray-800'
+                    }`}
+                  >
+                    <span>{cat.icon}</span>
+                    <span>{cat.nameZh}</span>
+                  </button>
+                ))}
+              </div>
+
               {/* Filter tabs */}
               <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2">
                 {[

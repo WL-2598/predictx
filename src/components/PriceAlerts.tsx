@@ -20,7 +20,7 @@ export default function PriceAlerts() {
     { id: 'a3', eventName: 'Arsenal vs. Chelsea', outcomeName: '超过 2.5', targetPrice: 80, direction: 'above', active: false, createdAt: new Date(Date.now() - 86400000) },
   ]);
   const [showForm, setShowForm] = useState(false);
-  const [newAlert, setNewAlert] = useState({ eventName: '', outcomeName: '', targetPrice: 50, direction: 'above' as const });
+  const [newAlert, setNewAlert] = useState({ eventName: '', outcomeName: '', targetPrice: 50, direction: 'above' as 'above' | 'below' });
   const { addToast } = useToast();
 
   const toggleAlert = (id: string) => {

@@ -17,7 +17,7 @@ function SidebarContent({ activeCategory, onCategoryChange }: SidebarProps) {
   if (pathname.startsWith('/event/') || pathname.startsWith('/settings') || pathname.startsWith('/leaderboard')) return null;
 
   return (
-    <aside className="fixed left-0 top-16 bottom-0 w-16 md:w-56 border-r border-gray-800 bg-[#0d0f14] overflow-y-auto z-40">
+    <aside className="hidden md:block fixed left-0 top-16 bottom-0 w-56 border-r border-gray-800 bg-[#0d0f14] overflow-y-auto z-40">
       <div className="py-4 px-2 md:px-3">
         <div className="hidden md:block mb-4 px-3">
           <h3 className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">体育赛事</h3>
@@ -120,7 +120,7 @@ function SidebarContent({ activeCategory, onCategoryChange }: SidebarProps) {
 export default function Sidebar(props: SidebarProps) {
   return (
     <Suspense fallback={
-      <aside className="fixed left-0 top-16 bottom-0 w-16 md:w-56 border-r border-gray-800 bg-[#0d0f14] z-40">
+      <aside className="hidden md:block fixed left-0 top-16 bottom-0 w-56 border-r border-gray-800 bg-[#0d0f14] z-40">
         <div className="py-4 px-2 md:px-3 space-y-1">
           {Array.from({ length: 8 }).map((_, i) => (
             <div key={i} className="h-10 bg-gray-800/30 rounded-xl animate-pulse" />

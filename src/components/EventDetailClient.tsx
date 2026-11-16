@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import Link from 'next/link';
 import TradingPanel from '@/components/TradingPanel';
 import EnhancedPriceChart from '@/components/EnhancedPriceChart';
@@ -156,24 +156,28 @@ export default function EventDetailClient({ eventId }: EventDetailClientProps) {
 
           {/* Teams + Score */}
           <div className="flex items-center justify-center gap-4 md:gap-8">
-            {event.teams.map((team) => (
-              <div key={team.id} className="flex flex-col items-center gap-2 flex-1 max-w-[160px]">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center text-sm font-bold text-white shadow-lg">
-                  {team.shortName.slice(0, 3)}
-                </div>
-                <p className="text-xs md:text-sm font-semibold text-white text-center truncate w-full">
-                  {team.name}
-                </p>
-                {team.score !== undefined && (
-                  <span className="text-2xl md:text-3xl font-bold text-white tabular-nums">
-                    {team.score}
-                  </span>
+            {event.teams.map((team, index) => (
+              <Fragment key={team.id}>
+                {index > 0 && (
+                  <div className="flex flex-col items-center shrink-0">
+                    <span className="text-lg font-bold text-gray-600">VS</span>
+                  </div>
                 )}
-              </div>
+                <div className="flex flex-col items-center gap-2 flex-1 max-w-[160px]">
+                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-gray-600 to-gray-700 flex items-center justify-center text-sm font-bold text-white shadow-lg">
+                    {team.shortName.slice(0, 3)}
+                  </div>
+                  <p className="text-xs md:text-sm font-semibold text-white text-center truncate w-full">
+                    {team.name}
+                  </p>
+                  {team.score !== undefined && (
+                    <span className="text-2xl md:text-3xl font-bold text-white tabular-nums">
+                      {team.score}
+                    </span>
+                  )}
+                </div>
+              </Fragment>
             ))}
-            <div className="flex flex-col items-center shrink-0">
-              <span className="text-lg font-bold text-gray-600">VS</span>
-            </div>
           </div>
         </div>
 
